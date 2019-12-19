@@ -1,0 +1,81 @@
+* {
+    padding: 0;
+}
+h1 {
+    padding: 20px;
+}
+.list-item {
+    cursor: pointer;
+}
+
+.list-item:hover {
+    text-decoration: underline;
+    color: red;
+}
+
+ul {
+    outline: 1px dashed green;
+}
+.task-title {
+    padding: 30px;
+}
+.list-title , .task-title {
+    text-align: center;
+}
+.task-input, .title-input, .number-input {
+
+    display: block;
+    margin : 10px auto;
+    padding:10px;
+  font-size: 20px;
+
+}
+label {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+.card {
+    border: 2px solid ;
+    border-radius: 25px;
+    display: inline-block;
+    text-align: center;
+    margin:10px;
+    width:400px;
+    height:200px;
+    background-color: #4056A1;
+}
+.card p, .card h4{
+
+
+}
+.card h4 {
+    font-size: 30px;
+    padding: 20px;
+}
+.card p {
+    font-size: 20px;
+    padding: 10px;
+}
+.delete-item-btn {
+padding: 10px;
+
+}
+.collection {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.btn, .delete-card-btn {
+    display: block;
+    margin: 10px auto;
+    padding:10px;
+    border: 2px solid ;
+    border-radius: 25px;
+}
+.number-input__container {
+
+    padding: 30px;
+    margin-left: 15px;
+    background-color: #C5CBE3;
+}

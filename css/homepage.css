@@ -1,0 +1,24 @@
+
+.projects {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.card{
+    border: 2px solid ;
+    border-radius: 25px;
+    width: 300px;
+    height: 300px;
+   display: inline-block;
+    margin: 20px;
+    background-color: #4056A1;
+
+}
+
+.card1__title , .card2__title, .card3__title {
+
+    border-radius: 25px;
+   color: #D79922;
+    font-size: 30px;
+    text-align: center;
+}
