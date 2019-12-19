@@ -5,6 +5,7 @@
 
 }
 
+
 .clearfix::after {
     content: "";
     display: table;
@@ -41,9 +42,41 @@ body {
     height: 600px;
     padding: 100px;
 }
+/**********************************************
+*** input
+**********************************************/
+.input-field-box {
+    width: 1000px;
+    height: 70px;
+    background-color: #fff;
+    position: absolute;
+    top: 13%;
+    left: 50%;
+    overflow: hidden;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
+}
+.input-field {
+    position: absolute;
+    top: 20px;
+    left: 32%;
+    height: 30px;
+    width: 60px;
+    font-size: 35px;
+    border-top: #f7f7f7;
+    border-left: #f7f7f7;
+    border-right: #f7f7f7;
+    border-bottom-color: #EB4D4D;
+    outline: none;
+    font-weight: 100;
+
+}
+
+.btn-input {
+    top: 25px;
 
 
-
+}
 /**********************************************
 *** PLAYERS
 **********************************************/
@@ -137,14 +170,23 @@ i {
 .btn-new { top: 45px;}
 .btn-roll { top: 403px;}
 .btn-hold { top: 467px;}
-
-.dice {
+.dice-main {
     position: absolute;
-    left: 50%;
-    top: 178px;
     transform: translateX(-50%);
     height: 100px;
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
+}
+.dice1 {
+
+    left: 50%;
+    top: 108px;
+
+}
+.dice2 {
+
+    left: 50%;
+    top: 258px;
+
 }
 
 .winner { background-color: #f7f7f7; }

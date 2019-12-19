@@ -22,3 +22,9 @@
     font-size: 30px;
     text-align: center;
 }
+.card3__img {
+width: 130px;
+    position: relative;
+    top: 50px;
+    left: 80px;
+}
