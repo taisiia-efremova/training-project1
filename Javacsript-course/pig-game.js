@@ -17,8 +17,8 @@ let dice2Img = document.querySelector(".dice2");
     dice1Img.style.display = 'block';
     dice2Img.style.display = 'block';
     //4.Changing the dice img according to the random number
-    dice1Img.src = "img/dice-" + dice1 + '.png';
-    dice2Img.src = "img/dice-" + dice2 + '.png';
+    dice1Img.src = "img/pig-game/dice-" + dice1 + '.png';
+    dice2Img.src = "img/pig-game/dice-" + dice2 + '.png';
     if (dice1 == 1 || dice2 == 1) {
       console.log("bingo")
       nextPlayer();

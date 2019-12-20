@@ -36,7 +36,7 @@ label {
     font-weight: bold;
 }
 .card {
-    border: 2px solid ;
+    border: 0.5px solid ;
     border-radius: 25px;
     display: inline-block;
     text-align: center;
@@ -44,6 +44,7 @@ label {
     width:400px;
     height:200px;
     background-color: #4056A1;
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
 }
 .card p, .card h4{
 
@@ -67,15 +68,26 @@ padding: 10px;
     align-items: center;
 }
 .btn, .delete-card-btn {
+    margin: 20px;
     display: block;
     margin: 10px auto;
     padding:10px;
-    border: 2px solid ;
+    border: 0.5px solid ;
     border-radius: 25px;
 }
-.number-input__container {
+.container-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.number-input__container, .ToDoList__containter {
 
+    margin: 20px;
+    width: 500px;
     padding: 30px;
     margin-left: 15px;
     background-color: #C5CBE3;
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
 }
