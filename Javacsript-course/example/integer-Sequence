@@ -1,0 +1,39 @@
+function findSequences(int) {
+
+let sum = int;
+let num = int;
+let arrayOfresult = [];
+let arrayOfIntegers = [];
+
+while(num > 0) {
+  arrayOfIntegers.unshift(num)
+num--;
+}
+
+
+(function() {
+  let arr = [];
+  let counter = 1;
+  while(sum >= 0) {
+    sum--;
+    sum -= counter;
+
+
+    arr.push(counter);
+    counter ++;
+  }
+  arrayOfresult.push(arr);
+})();
+
+
+
+
+
+console.log("***My Results****")
+console.log(arrayOfresult)
+  console.log("++++Integer scale++++")
+console.log(arrayOfIntegers)
+}
+
+findSequences(15);
+findSequences(20)
