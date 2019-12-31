@@ -2,7 +2,7 @@
   "name": "project1",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "learn-js/index.js",
   "scripts": {
     "dev": "lite-server"
   },

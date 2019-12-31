@@ -8,7 +8,7 @@ function sym(...args) {
  console.log(args);
  for(let i = 0; i < args.length; i++) {
   let a = [];
- args[i].forEach(i => a.includes(i) ? i : a.push(i))
+ args[i].forEach(i => a.includes(i) ? i : a.push(i));
 console.log(a);
   firstResultArr.push(a);
  }

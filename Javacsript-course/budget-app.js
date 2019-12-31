@@ -105,9 +105,11 @@ data.budget = data.totals.inc - data.totals.exp;
     calculatePercentages: function () {
 
       data.allItems.exp.forEach(function(cur) {
-        cur.calcPercentage();
+        cur.calcPercentage(data.totals.inc);
       })
     },
+
+
     getPercentages : function () {
       let allPerc = data.allItems.exp.map(function(cur) {
         return cur.getPercentage()
@@ -156,11 +158,36 @@ let DOMstrings =  {
   incomeLabel: ".budget__income--value",
   expensesLabel: ".budget__expenses--value",
   percentageLabel: ".budget__expenses--percentage",
-  container:'.container'
+  container:'.container',
+  expensesPercLabel: ".item__percentage",
+  dateLabel: ".budget__title--month",
 
 
 };
+  const formatNumber = function(num, type) {
+    let numSplit, dec, int;
+    //  + or - before the number || . exactly 2 decimal points || comma separating the thousands
+    num = Math.abs(num);
+    num = num.toFixed(2);
+    numSplit = num.split(".");
+    int = numSplit[0];
+    if(int.length > 3) {
+      int = int.substr(0,int.length - 3) + "," + int.substr(int.length - 3,3);
 
+    }
+    dec = numSplit[1]
+
+
+    return  (type === "exp" ? sing = "-" : sing = "+")  + " " + int + "." + dec;
+
+  };
+   let nodeListForEach = function (list, callback) {
+
+    for(let i = 0; i < list.length;i++) {
+      callback(list[i], i);
+    }
+
+  };
   //to write a public method in the IIFI we need to return and object;
   return {
     getInput: function () {
@@ -193,6 +220,7 @@ if(type === "inc") {
     '            <div class="item__description">%description%</div>\n' +
     '            <div class="right clearfix">\n' +
     '                <div class="item__value">%value%</div>\n' +
+    '<div class="item__percentage">10%</div>' +
     '                <div class="item__delete">\n' +
     '                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>\n' +
     '                </div>\n' +
@@ -203,7 +231,7 @@ if(type === "inc") {
 //  Replace the placeholder text with some actual data(text between the tags)
  newHTML = html.replace('%id%', obj.id);
 newHTML = newHTML.replace('%description%', obj.description);
-newHTML = newHTML.replace('%value%', obj.value);
+newHTML = newHTML.replace('%value%', formatNumber( obj.value, type));
 
 //  insert html into the dom
  document.querySelector(element).insertAdjacentHTML('beforeend', newHTML);
@@ -231,9 +259,11 @@ newHTML = newHTML.replace('%value%', obj.value);
       fieldsArr[0].focus();
     },
     displayBudget: function(obj) {
-    document.querySelector(DOMstrings.budgetLabel).textContent = obj.budget;
-      document.querySelector(DOMstrings.incomeLabel).textContent = obj.totalInc;
-      document.querySelector(DOMstrings.expensesLabel).textContent = obj.totalExp;
+      let type;
+      obj.budget > 0 ? type = "inc" : type = "exp";
+    document.querySelector(DOMstrings.budgetLabel).textContent = formatNumber(obj.budget,type) ;
+      document.querySelector(DOMstrings.incomeLabel).textContent =formatNumber(obj.totalInc,"inc") ;
+      document.querySelector(DOMstrings.expensesLabel).textContent = formatNumber(obj.totalExp, " exp");
 
 
       if(obj.percentage > 0) {
@@ -244,6 +274,56 @@ newHTML = newHTML.replace('%value%', obj.value);
 
 
     },
+    displayPercentages: function(percentages) {
+
+      let fields = document.querySelectorAll(DOMstrings.expensesPercLabel);
+
+      //create the function that have a callback as parameter.
+      //It loops through the NodeList with for loop
+      // and use a callback with each iteration of the list
+
+
+      //calling the function
+      nodeListForEach(fields, function(current,index) {
+        if(percentages[index] > 0) {
+          current.textContent = percentages[index] + '%';
+        } else {
+          current.textContent = '---';
+        }
+
+
+      })
+
+    },
+
+    displayMonth: function() {
+       let now, year, month, months;
+      now = new Date();
+
+      months =["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+    month = now.getMonth();
+      year = now.getFullYear();
+     document.querySelector(DOMstrings.dateLabel).textContent = months[month] + " " + year;
+    },
+
+    changedType: function() {
+
+      let fields = document.querySelectorAll(
+        DOMstrings.inputType + "," +
+        DOMstrings.inputDescript + "," +
+        DOMstrings.inputval);
+
+
+     nodeListForEach(fields, function(cur) {
+       cur.classList.toggle("red-focus");
+     })
+
+
+      document.querySelector(DOMstrings.inputBtn).classList.toggle("red");
+
+    },
+
     getDOMstrings: function () {
       return DOMstrings;
     }
@@ -269,6 +349,8 @@ let controller = (function(budgetCtrl,UICtrl) {
       }
     });
     document.querySelector(DOM.container).addEventListener("click", ctrlDeleteItem);
+
+    document.querySelector(DOM.inputType).addEventListener("change",UICtrl.changedType)
   };
 
 let updateBudget = function () {
@@ -286,7 +368,7 @@ budgetCtrl.calculatePercentages();
 //  2.Read percentages from budgetcontroller
 let percentages = budgetCtrl.getPercentages();
 //  3.Update the UI with the new percentages
-console.log(percentages);
+UICtrl.displayPercentages(percentages);
 };
 
   let ctrlAddItem =  function () {
@@ -334,6 +416,7 @@ updateBudget();
 
   return {
     init: function () {
+      UICtrl.displayMonth();
       UICtrl.displayBudget({
         budget: 0,
         totalInc: 0,
