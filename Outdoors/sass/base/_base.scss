@@ -1,0 +1,19 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    /* to allow box-sizing: to inherit. to change easier the box-sizing: inside the elements;; */
+    box-sizing: inherit;
+}
+
+html {
+    /* pers from the default font size = 16px */
+    // defines what 1 rem is!!!! define the mesuares!!!!
+    font-size: 62.5%;
+}
+
+body {
+   
+    box-sizing: border-box;
+}

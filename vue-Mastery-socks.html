@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="img/forms.png">
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="vue-Mastery-Socks/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script defer src="vue-Mastery-Socks/main.js"></script>
+  <title>Vue Project</title>
+</head>
+
+<body>
+  <div class="nav-bar"></div>
+
+  <div id="app">
+
+
+    <product :premium="premium" @add-to-cart="updateCart" @remove-from-cart="removeItem"></product>
+    <div class="cart">
+      <p>Cart({{cart.length}})</p>
+
+
+    </div>
+  </div>
+  </main>
+  <footer>
+    <div class="footer-block">
+      <a href="index.html">
+        <h2>Back To Home</h2>
+      </a>
+    </div>
+  </footer>
+
+
+  <!-- ! beggining of -->
+
+
+  <!-- ** template for details -->
+  <template id="details">
+    <p>{{description}}</p>
+    <ul>
+      <li v-for="detail in details">{{detail}}</li>
+    </ul>
+  </template>
+
+
+  <!-- ** Main template for the shopping card -->
+  <template id="store-card">
+    <div class="product">
+      <div class="product-image">
+        <!-- ! v-bind dinamically binds an attribute to an expression -->
+        <img class="product-icon" :src="image">
+      </div>
+      <div class="product-info">
+        <h1>{{title}}</h1>
+        <p v-if="inStock">In Stock</p>
+        <p v-else :class="{ outOfStock: !inStock}">Out of Stock</p>
+        <h3 v-if="onSale"> Sale is now!!</h3>
+        <h3 v-else>Sale is over!!</h3>
+        <p>Shipping: {{shipping}} </p>
+      
+        <ul>
+          <li v-for="detail in details">{{detail}}</li>
+        </ul>
+        <div v-for="(variant, index) in variants" :key="variant.variantId" class="color-box"
+          :style="{backgroundColor: variant.variantColor}" @mouseover="updateProduct(index)">
+        </div>
+        <button v-on:click="addToCart" :disabled="!inStock" :class="{disabledButton: !inStock}">Add to cart</button>
+        <button @click="removeFromCart">
+          Remove from cart
+        </button>
+        <select>
+          <option v-for='size in sizes'>{{size}}</option>
+        </select>
+         
+      </div>  <product-review @review-submitted="addReview"></product-review>
+    </div>
+   
+  </template>
+
+<!-- ** template for the form -->
+
+<template id="form-template">
+  <!-- v-model to bind a binding from template to a data!! input recieve a data and push it to data -->
+<!-- two-way data binding -->
+<form class="review-form">
+  <p>
+    <label for="name">Name:</label>
+    <input id="name" v-model="name" placeholder="name">
+  </p>
+  
+  <p>
+    <label for="review">Review:</label>      
+    <textarea id="review" v-model="review"></textarea>
+  </p>
+  
+  <p>
+    <label for="rating">Rating:</label>
+    <select id="rating" v-model.number="rating">
+      <option>5</option>
+      <option>4</option>
+      <option>3</option>
+      <option>2</option>
+      <option>1</option>
+    </select>
+  </p>
+      
+  <p>
+    <input type="submit" value="Submit">  
+  </p>    
+
+</form>
+</template>
+
+
+
+
+</body>
+
+</html>
